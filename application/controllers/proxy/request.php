@@ -27,7 +27,7 @@ class Request extends CI_Controller
             response(10000, '代理请求路由参数不合法', array(), 422);
         }
         $this->load->helper('curl_helper');
-        echo curl_get($url, $get, $this->get_request_header());
+        echo curl_get($url, $get, $this->get_request_header(), array(CURLOPT_PROXY => $_SERVER['SERVER_ADDR']));
     }
 
     public function post()
@@ -38,6 +38,6 @@ class Request extends CI_Controller
             response(10000, '代理请求路由参数不合法', array(), 422);
         }
         $this->load->helper('curl_helper');
-        echo curl_post($url, $post, $this->get_request_header());
+        echo curl_post($url, $post, $this->get_request_header(), array(CURLOPT_PROXY => $_SERVER['SERVER_ADDR']));
     }
 }
